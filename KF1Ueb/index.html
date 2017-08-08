@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="StyleSheet.css" rel="stylesheet" />
+    
+  </head>
+  <body>
+  <div class="container">
+    <input type='button' class="site" value='Добавить строчку' onclick="addInput(document.getElementById('cont'))" /><br>
+    
+    <div id='cont'>
+      
+    </div> <br> 
+    Итого :<input type='text' id="result" class="bold" readonly="true" value="0" style="border:none;"/>
+    Операций :<input type='text' id="up" class="bold" readonly="true" value="0" style="border:none;"/>
+    </div>
+    <script>
+      function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
+      function trim(v)
+      {
+        return v.replace(/^\s+|\s+$/g, ''); 
+      }
+      function sortNumber(a, b)
+        {
+        return a - b;
+        }
+        var num = 5;
+        var n = ["5", "40", "25", "100", "1"];
+        document.write(n.sort(sortNumber));
+      function save(el) {
+        var elm = document.getElementById('result');
+        
+        if (isNumber(el.value)){
+          elm.value = parseInt(elm.value) + parseInt(el.value);
+          el.value = trim(el.value);
+          el.parentNode.children[1].className = 'hid';
+          el.parentNode.children[2].className = 'knopka';
+          el.parentNode.className += ' sv';
+        }
+        else
+          alert('Введите число');
+        
+      }
+      function del(el) {
+        var elm = document.getElementById('result');
+        elm.value = parseInt(elm.value) - parseInt(el.value);
+        
+        el.parentNode.parentNode.removeChild(el.parentNode);
+      }
+      function hasClass(el, cls) {
+        return el.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
+      }
+     
+      function addInput (elm) {
+		if (typeof elm.children[0] === 'undefined' || hasClass(elm.children[0],'sv')) {
+          var i = elm.children.length + 1;
+          var dv = document.createElement('div');
+          dv.innerHTML = '<input type="text" placeholder="Введите сумму" id="input'+i+'" name="input'+i+'" type="text" class="text" />'+
+            '<input type="button" id="btnSave'+i+'" value="Сохранить" name="btnSave'+i+'" class="knopka">'+
+              '<input type="button" id="upp'+i+'" value="Возростание" name="upp'+i+'" class="knopka">'+
+              '<input type="button" id="btnDel'+i+'" value="Удалить" name="btnDel'+i+'" class="hid">';
+          dv.children[1].onclick = function () {save(dv.children[0])};
+          dv.children[2].onclick = function () { del(dv.children[0])};
+          
+          if (typeof elm.children[0] !== 'undefined')
+            elm.insertBefore(dv, elm.children[0]);
+          else
+            elm.appendChild(dv);
+        }
+      }
+    </script>
+  </body>
+</html>
