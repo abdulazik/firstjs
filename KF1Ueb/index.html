@@ -3,12 +3,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <link href="StyleSheet.css" rel="stylesheet" />
+    <link href="assets/css/StyleSheet.css" rel="stylesheet" />
     
   </head>
   <body>
   <script>
-      var funcCall = 0;
+      var times = 0;
       function isNumber(n) {
           return !isNaN(parseFloat(n)) && isFinite(n);
       }
@@ -27,7 +27,6 @@
           var elm = document.getElementById('result');
 
           if (isNumber(el.value)){
-
               elm.value = parseInt(elm.value) + parseInt(el.value);
               el.value = trim(el.value);
               el.parentNode.children[1].className = 'hid';
@@ -65,6 +64,8 @@
                   elm.appendChild(dv);
           }
       }
+
+
   </script>
   <div class="container">
     <input type='button' class="site" value='Добавить строчку' onclick="addInput(document.getElementById('cont'))" /><br>
@@ -73,9 +74,9 @@
       
     </div> <br> 
     Итого :<input type='text' id="result" class="bold" readonly="true" value="0" style="border:none;"/>
-    Операций :<script>document.write( funcCall );</script>
+    Операций :<script>document.write( times );</script>
     </div>
 
-  <script src="js.js"></script>
+  <script src="assets/js/js.js"></script>
   </body>
 </html>
